@@ -1,0 +1,153 @@
+<?php
+/** @var \Magento\CatalogSearch\Helper\Data $helper */
+$helper = $this->helper(\Magento\CatalogSearch\Helper\Data::class);
+$customerId = $this->getCustomerId();
+$shippingType = $this->getShipping();
+
+?>
+
+<button id="btn1" class="btn1">New Order</button>
+<button id="btnEdit" class="btnEdit">Edit</button>
+
+<div style="display: none;" id="modal-html">
+    <div id="popup">
+        <label><input type="radio" name="option" value="0">Shipping</label><br>
+        <label><input type="radio" name="option" value="1">Pickup</label><br>
+        <label><input type="radio" name="option" value="2">Dealer Arrange Shipping</label><br>
+    </div>
+</div>
+
+<div style="display: none;" id="modal-edit">
+    <div id="popup">
+        <label><input type="radio" name="editoption" value="0">Shipping</label><br>
+        <label><input type="radio" name="editoption" value="1">Pickup</label><br>
+        <label><input type="radio" name="editoption" value="2">Dealer Arrange Shipping</label><br>
+    </div>
+</div>
+
+<div style="display: none;" id="modal-html-active">
+    <div id="popup">
+        <p>You have an active quote.</p>
+    </div>
+</div>
+
+<script>
+    var customerId = <?= $customerId ? $customerId : 'null'; ?>;
+
+ 
+require(['jquery', 'Magento_Ui/js/modal/modal', 'mage/storage',
+], function($, modal, storage) {
+    $(document).ready(function() {
+        if(customerId == null)
+        {
+            $('#btn1').hide();
+            $('#btnEdit').hide();
+        }
+        console.log(customerId);
+        var optionsModal = {
+            type: 'popup',
+            responsive: true,
+            innerScroll: true,
+            buttons: [{
+                text: $.mage.__('Confirm'),
+                class: 'confirmBtnClass',
+                click: function () {
+                    var selectedOption = $('input[name="option"]:checked').val();
+                    if (selectedOption) {
+                        storage.post('modify/index/save', JSON.stringify({
+                            "field": 'Shipping Type',
+                            "value": selectedOption
+                        }), true).done(function() {
+                            $('#modal-html').modal("closeModal");
+                        }).fail(function() {
+                            alert('Error occurred.');
+                        });
+                    } else {
+                        alert('Please select an option.');
+                    }
+                }
+            }]
+        };
+
+        var activeQuoteOptions = {
+            type: 'popup',
+            responsive: true,
+            innerScroll: true,
+            buttons: [{
+                text: $.mage.__('Close'),
+                class: 'confirmBtnClass',
+                click: function () {
+                    $('#modal-html-active').modal('closeModal');  
+                }
+            },{
+                text: $.mage.__('Delete'),
+                class: 'confirmBtnClass',
+                click: function () {
+                    storage.post('modify/index/delete').done(function() {
+                        $('#modal-html-active').modal("closeModal");
+                        $('#modal-html').modal(optionsModal).modal('openModal');
+                    }).fail(function() {
+                        alert('Error occurred.');
+                    }); 
+                }
+            }]
+        };
+        var editModal = {
+            type: 'popup',
+            responsive: true,
+            innerScroll: true,
+            buttons: [{
+                text: $.mage.__('Confirm Edit'),
+                class: 'confirmBtnClass',
+                click: function () {
+                    var selectedOption = $('input[name="editoption"]:checked').val();
+                    if (selectedOption) {
+                        storage.post('modify/index/save', JSON.stringify({
+                            "field": 'Shipping Type',
+                            "value": selectedOption
+                        }), true).done(function() {
+                            $('#modal-edit').modal("closeModal");
+                        }).fail(function() {
+                            alert('Error occurred.');
+                        });
+                    } else {
+                        alert('Please select an option.');
+                    }
+                }
+            }]
+        };
+
+
+        $('#btn1').click(function() {
+            storage.get('modify/index/index').done(function(response) {
+                if (response.isActive === 0) {
+                    $('#modal-html').modal(optionsModal).modal('openModal');
+                } else if(response.isActive === 1) {
+                    $('#modal-html-active').modal(activeQuoteOptions).modal('openModal');
+                } else {
+                    alert('No active order found.');
+                }
+            }).fail(function() {
+                console.error('Failed to fetch quote status');
+            });
+        });
+
+        $('#btnEdit').click(function() {
+            storage.get('modify/index/edit').done(function(response) {
+                if (response && response.selectedOption !== undefined) {
+                    $('input[name="editoption"][value="' + response.selectedOption + '"]').prop('checked', true);
+                }
+                $('#modal-edit').modal(editModal).modal('openModal');
+            }).fail(function() {
+                console.error('Failed to fetch current shipping option');
+                alert('Error fetching current option');
+            });
+        });
+
+        if (window.checkoutConfig.shipping_type === null) {
+            $('#modal-html').modal(optionsModal).modal('openModal');
+        }
+       
+    });
+});
+</script>

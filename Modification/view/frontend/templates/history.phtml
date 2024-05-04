@@ -1,0 +1,8 @@
+<?php
+    /* @var $block \Magento\Sales\Block\Order\History\Container */
+?>
+
+ <td data-th="<?= $block->escapeHtml(__('Created At')) ?>" class="col created- 
+ date">
+  <?= $block->escapeHtml($block->getOrder()->getCreatedAt()) ?>
+  </td>

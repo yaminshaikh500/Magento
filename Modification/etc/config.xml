@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <carriers>
+            <shipping>
+                <active>0</active>
+                <model>Cp\Modification\Model\Shipping\Shipping</model>
+               <title>Shipping</title>
+               <name>Shipping</name>
+               <price>10</price>
+               <residential>20</residential>
+               <liftgate>5</liftgate>
+               <delivery>10</delivery>
+        </shipping>
+             <pickup>
+                <active>0</active>
+                <model>Cp\Modification\Model\Shipping\Pickup</model>
+               <title>Pickup</title>
+               <name>Pickup</name>
+               <price>0</price>
+            </pickup>
+             <dealer >
+                <active>0</active>
+                <model>Cp\Modification\Model\Shipping\Dealer</model>
+               <title>Dealer</title>
+               <name>Dealer</name>
+               <price>15</price>
+            </dealer >
+        </carriers>
+    
+    </default>
+</config>

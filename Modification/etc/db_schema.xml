@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+
+    <table name="quote">
+        <column name="custom_shipping" nullable="true" xsi:type="int"  comment="custom shipping "/>
+  
+        <column name="shipping_type" nullable="true" xsi:type="int"  comment="custom shipping Type "/>
+ 
+        <column name="residential_ship" nullable="true" xsi:type="int" comment="custom Residential customer"/>
+ 
+        <column name="liftgate_ship" nullable="true" xsi:type="int" comment="custom Liftgate for customer"/>
+ 
+        <column name="delivery_ship" nullable="true" xsi:type="int"  comment="custom Delivery for customer"/>
+    </table>
+ 
+    <table name="sales_order">
+  
+        <column name="custom_shipping" nullable="true" xsi:type="int"  comment="custom shipping "/>
+
+        <column name="shipping_type" nullable="true" xsi:type="int"  comment="custom shipping Type "/>
+ 
+        <column name="residential_ship" nullable="true" xsi:type="int"  comment="custom Residential customer"/>
+ 
+        <column name="liftgate_ship" nullable="true" xsi:type="int"  comment="custom Liftgate for customer"/>
+ 
+        <column name="delivery_ship" nullable="true" xsi:type="int"  comment="custom Delivery for customer"/>
+    </table>
+ 
+</schema>
+ 
