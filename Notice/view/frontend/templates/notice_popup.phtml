@@ -1,0 +1,54 @@
+
+<?php if ($block->checkCustomer() && !$block->isMarked()): ?>
+<div style="display: none;" id="modal-notification">
+    <div id="popup">
+       <b><label>Title:</label></b><span><?= $block->escapeHtml($block->getTitles()) ?></span><br>
+       <b><label>Description:</label></b><span><?= $block->escapeHtml($block->getDescriptions()) ?></span><br><br>
+       <label><input type="checkbox" id="mark" name="mark" value="1">Mark as Read</label><br>
+    </div>
+</div>
+<?php endif; ?>
+<script>
+    require([
+        'jquery',
+        'Magento_Ui/js/modal/modal',
+        'mage/storage'
+    ], function(
+        $,
+        modal,
+        storage
+    ) {
+        $(document).ready(function() {
+        var notice = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                title: $.mage.__('Notification'),
+                buttons: [{
+                    text: $.mage.__('Confirm'),
+                    class: 'continueBtn',
+                    click: function () {
+                        $('#modal-notification').modal("closeModal");
+                    }
+                }]
+            }; $('#modal-notification').modal(notice).modal("openModal");
+ 
+            var checkBox = document.getElementById('mark').value;
+ 
+            $("#mark").click(function() {
+                storage.post(
+                    'notice/index/save',
+                    JSON.stringify({
+                        "field":'checkbox',
+                        "value": checkBox
+                    }),
+                    true
+                ).done(function(response) {
+ 
+                }).fail(function(response) {
+                    alert('main Error occurred.');
+                });
+            });
+        });
+    });
+</script>
