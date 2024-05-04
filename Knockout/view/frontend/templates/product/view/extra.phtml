@@ -1,0 +1,17 @@
+<?php
+$viewModel = $block->getData('view_model');
+?>
+<table>
+    <tr>
+        <th>UserId</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Creation Time</th>
+        <th>Update Time</th>
+        <th>Status</th>
+        <th>Admin Id</th>
+</tr>   
+<?php echo $viewModel->display();?>
+
+
+
