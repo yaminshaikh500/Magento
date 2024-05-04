@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <update handle="editor"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="Cp\User\Block\Adminhtml\UserGrid\Edit" name="user_grid_edit"/>
+        </referenceContainer>
+        <referenceContainer name="left">
+            <block class="Cp\User\Block\Adminhtml\UserGrid\Edit\Tabs" name="user_grid_edit_tabs">
+                <block class="Cp\User\Block\Adminhtml\UserGrid\Edit\Tab\Main" name="user_grid_edit_tab_main"/>
+                <block class="Cp\User\Block\Adminhtml\UserGrid\Edit\Form" name="user_grid_edit_form"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">main_section</argument>
+                    <argument name="block" xsi:type="string">user_grid_edit_tab_main</argument>
+                </action>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">cp_cron_listing.cp_cron_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <!-- <buttons>
+            <button name="add">
+                <url path="*/*/new"/>
+                <class>primary</class>
+                <label translate="true">Add New Customer</label>
+            </button>
+        </buttons> -->
+        <spinner>cron_list_columns</spinner>
+        <deps>
+            <dep>cp_cron_listing.cp_cron_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="cp_cron_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Cp_User::cron_list</aclResource>
+        <dataProvider class="Magento\Customer\Ui\Component\DataProvider" name="cp_cron_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>schedule_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <exportButton name="export_button"/>
+        <filterSearch name="fulltext"/>
+        <filters name="listing_filters"/>
+        </listingToolbar>
+     <columns name="cron_list_columns">
+        <column name="schedule_id" component="Magento_Ui/js/grid/columns/column" sortOrder="10">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">ID</label>
+                <sorting>asc</sorting>
+                <dataType>text</dataType>
+            </settings>
+        </column>
+        <column name="job_code" component="Magento_Ui/js/grid/columns/column" sortOrder="20">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Job Code</label>
+            </settings>
+        </column>
+        <!-- Add more columns as needed -->
+        <column name="status">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Status</label>
+            </settings>
+        </column>
+        <column name="messages">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Messages</label>
+            </settings>
+        </column>
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Created At</label>
+            </settings>
+        </column>
+        <column name="scheduled_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Scheduled At</label>
+            </settings>
+        </column>
+        <column name="executed_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Executed At</label>
+            </settings>
+        </column>
+        <column name="finished_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Finished At</label>
+            </settings>
+        </column>
+    </columns>
+</listing>
