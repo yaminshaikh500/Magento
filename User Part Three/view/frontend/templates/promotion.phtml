@@ -1,0 +1,52 @@
+<h3> Promotion </h3>
+<?php if($block->getModuleEnable()): ?>
+    <?php
+   
+    $currentDate = strtotime('now');
+
+    $startDate = strtotime($block->getStartDate());
+    $endDate = strtotime($block->getEndDate());
+
+    if ($currentDate >= $startDate && $currentDate <= $endDate):
+    ?>
+    <h3> All Promotion Details </h3>
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Start Date </th>
+        <th>End date</th>
+        <th>Active User</th>
+    </tr>
+    <div>
+        <td><?php echo $block->getDisplayName(); ?></td>
+        <td><?php echo $block->getDisplayDescription(); ?></td>
+        <td><?php echo $block->getStartDate(); ?></td>
+        <td><?php echo $block->getEndDate(); ?></td>
+        <td><?php echo $block->isActive(); ?></td>
+    </div>
+    <?php elseif($currentDate < $startDate):?>
+        <p> Coming Soon..</p>
+    <?php else:?>
+        <p> Promotion Expired.. </p>
+    
+    <?php endif; ?>
+<?php endif; ?>
+
+<hr>
+<h3> All User Details </h3>
+<table>
+    <tr>
+    
+        <td>id</td>
+        <td>Name</td>
+        <td>Email</td>
+        <td>created date </td>
+        <td>Update date</td>
+        <td>Action</td>
+    </tr>
+    <?php
+
+        echo $block->records();
+        ?>
+

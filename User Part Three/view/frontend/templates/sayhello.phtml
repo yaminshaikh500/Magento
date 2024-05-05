@@ -1,0 +1,75 @@
+<h3 class = "page-title"> This is my new template </h3> 
+<button id='button1'>Try</button>
+<button id='button1'>hello</button>
+<!-- <script>
+    require([
+    'jquery'
+], function ($) {
+    alert("hellorequire");
+    
+});
+
+</script> -->
+<form action="<?php echo $this->getURL('user1/gallery/save')?>" method= "POST">
+
+<input type="hidden" name="user_id" value="<?php echo $this->getRequest()->getparam("id");?>">
+    <label>Name</label>
+    <input type="text" name="name" ><br>
+
+    <label>Email</label>
+    <input type="text" name="email"><br>
+
+    <label>Password</label>
+    <input type="text" name="password"><br>
+
+    <input type="submit" name="submit"><br>
+</form>
+
+<form action="<?php echo $block->getUrl('user1/index/index') ?>" method="GET">
+    <label >Select User Status:</label>
+    <select name="user_status" id="user_status">
+    <option value="all">All</option>
+        <option value="1">Active</option>
+        <option value="0">Inactive</option>
+    </select>
+    <button type="submit">Filter</button>
+<br>
+    <label for="sorting">Select Sort Order:</label>
+    <select name="sorting" id="sorting">
+        <option value="ASC">Ascending</option>
+        <option value="DESC">Descending</option>
+    </select>
+    <button type="submit">Sort</button>
+</form>
+
+
+<form action="<?php echo $block->getUrl('user1/gallery/deleteall') ?>" method="post">
+    <button type="submit" name="submit" class="action primary">
+        Delete All
+    </button>
+</form>
+
+
+<h3> All User Details </h3>
+<table>
+    <tr>
+    
+        <td>id</td>
+        <td>Name</td>
+        <td>Email</td>
+        <td>created date </td>
+        <td>Update date</td>
+        <td>Action</td>
+    </tr>
+    <?php
+
+        echo $block->display();
+
+     echo $this->getLayout()
+    ->createBlock('Magento\Cms\Block\Block')
+    ->setBlockId('contact')
+    ->toHtml();
+    ?>
+
+    
+</table>

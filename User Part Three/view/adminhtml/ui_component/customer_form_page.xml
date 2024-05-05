@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">customer_form_page.customer_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Customer Information</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="save" class="Cp\User\Block\Adminhtml\CustomerForm\Edit\SaveButton"/>
+            <button name="back" class="Cp\User\Block\Adminhtml\CustomerForm\Edit\BackButton"/>
+        </buttons>
+        <namespace>customer_form_page</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>customer_form_page.customer_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="customer_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="user2/customerform/save"/>
+        </settings>
+        <dataProvider class="Cp\User\Model\CustomerProvider\DataProvider" name="customer_form_data_source">
+            <settings>
+                <requestFieldName>customer_id</requestFieldName>
+                <primaryFieldName>customer_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="customer_form">
+        <settings>
+            <label/>
+        </settings>
+        <field name="customer_id" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Id</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>customer_id</dataScope>
+            </settings>
+        </field>
+        <field name="first_name" sortOrder="10" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">FirstName</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">first_name</label>
+                <dataScope>first_name</dataScope>
+            </settings>
+        </field>
+        <field name="profile_image" sortOrder="20" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">profile_image</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">profile_image</label>
+                <dataScope>profile_image</dataScope>
+            </settings>
+        </field>
+        <field name="last_name" sortOrder="20" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">last_name</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Last Name</label>
+                <dataScope>last_name</dataScope>
+            </settings>
+        </field>
+        <field name="email" sortOrder="30" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">email</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="validate-email" xsi:type="boolean">true</rule>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Email</label>
+                <dataScope>email</dataScope>
+            </settings>
+        </field>
+        <field name="birth_date" sortOrder="40" formElement="date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">birth_date</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>date</dataType>
+                <label translate="true">Birth Date</label>
+                <dataScope>birth_date</dataScope>
+            </settings>
+        </field>
+        <field name="address" sortOrder="50" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">address</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>textarea</dataType>
+                <label translate="true">address</label>
+                <dataScope>address</dataScope>
+            </settings>
+        </field>
+        <field name="is_active" formElement="select">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Is Active</label>
+                <dataScope>is_active</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Cp\User\Model\Config\Source\Selectactive"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="hobbies" formElement="multiselect" sortOrder="60">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Hobbies</label>
+                <dataScope>hobbies</dataScope>
+                <notice>Use Ctrl+Click for check several values or uncheck value. All unassigned sales channels will be assigned to the Default Stock.</notice>
+                <tooltip>
+                    <description>Notice that only one Stock can be mapped to each Sales Channel. Any previous assignation would be removed for each selected Sales Channel.</description>
+                </tooltip>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <multiselect>
+                    <settings>
+                        <options class="Cp\User\Model\Config\Source\Hobbies"/>
+                    </settings>
+                </multiselect>
+            </formElements>
+        </field>
+        <field name="gender">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Cp\User\Model\Config\Source\Gender</item>
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">70</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">radioset</item>
+                    <item name="label" xsi:type="string" translate="true">Gender</item>
+                    <item name="source" xsi:type="string">category</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field formElement="imageUploader" name="profile_image" sortOrder="45">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">profile_image</item>
+                </item>
+            </argument>
+            <settings>
+                <elementTmpl>ui/form/element/uploader/image</elementTmpl>
+                <dataType>string</dataType>
+                <label translate="true">Profile Image</label>
+                <visible>true</visible>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <imageUploader>
+                    <settings>
+                        <required>true</required>
+                        <uploaderConfig>
+                            <param xsi:type="url" name="url" path="user2/uploader/upload"/>
+                        </uploaderConfig>
+                        <openDialogTitle>Media Gallery</openDialogTitle>
+                        <allowedExtensions>jpg jpeg png</allowedExtensions>
+                        <maxFileSize>4194304</maxFileSize>
+                    </settings>
+                </imageUploader>
+            </formElements>
+        </field>
+        <field name="newsletter_subscription">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Cp\User\Model\Config\Source\Yesno</item>
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">100</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">checkboxset</item>
+                    <item name="label" xsi:type="string" translate="true">Subscription</item>
+                    <item name="source" xsi:type="string">newsletter_subscription</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+</form>

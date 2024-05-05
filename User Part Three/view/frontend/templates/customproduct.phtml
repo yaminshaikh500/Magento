@@ -1,0 +1,13 @@
+<h3 class = "page-title"> This is my new template </h3> 
+
+<?php echo $block->sayHello();?>
+<?php 
+    $productCollection = $block->getLoadedProductCollection();
+    foreach ($productCollection as $_product):
+?>
+    <img src="<?php echo $block->getImage($_product, 'product_base_image')->getImageUrl(); ?>"  />
+    <?php echo $_product->getName(); ?></span>
+    <?php echo $_product->getPrice(); ?></span>
+        
+    
+<?php endforeach; ?>

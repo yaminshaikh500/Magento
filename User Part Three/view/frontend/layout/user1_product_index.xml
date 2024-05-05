@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+ <head>
+ <css src="Cp_User::css/test.css"/>
+ <script src="Cp_User::js/jquery.min.js"></script>
+ <script src="Cp_User::js/test.js"/>
+ </head>
+  <body>
+    <referenceContainer name="content">
+
+        <block class="Cp\User\Block\Product\ListProduct" name="user1_product" template="Cp_User::product/list.phtml" />
+          
+           </referenceContainer>
+           
+      </body>     
+    <!-- <referenceContainer name="content">
+  <block class="Magento\Cms\Block\Block" name="contatc">
+    <arguments>
+      <argument name="block_id" xsi:type="string">contact</argument>
+    </arguments>
+  </block>
+</referenceContainer> -->
+</page>
